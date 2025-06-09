@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            String[] fruits = {"Apple", "Banana"};
+            for(String fruit : fruits) {
+              System.out.println(fruit);
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 7: <span class="java-accent">Arrays, Strings, and Vectors</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">One-dimensional Arrays</h2>
+          <div class="mb-6">
+            <p class="mb-3">An array is a container object that holds a fixed number of values of a single type.</p>
+            
+            <div class="code-block mb-3">
+              <pre><span class="comment">// Declaration</span>
+<span class="keyword">int</span>[] numbers;
+
+<span class="comment">// Initialization</span>
+numbers = <span class="keyword">new</span> <span class="keyword">int</span>[5];
+
+<span class="comment">// Declaration and initialization</span>
+<span class="keyword">int</span>[] scores = {95, 85, 75, 90, 88};</pre>
+            </div>
+            
+            <div class="highlight-box">
+              <p><strong>Key Points:</strong></p>
+              <ul class="list-disc pl-6 space-y-1">
+                <li>Arrays have fixed size once created</li>
+                <li>Array indices start at 0</li>
+                <li>Arrays store elements of the same type</li>
+                <li>Use <code>array.length</code> to get the size</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Strings</h2>
+          <div class="mb-6">
+            <p class="mb-3">Strings in Java are immutable objects that represent sequences of characters.</p>
+            
+            <div class="code-block mb-3">
+              <pre><span class="comment">// String creation</span>
+String str1 = <span class="string">"Hello"</span>;
+String str2 = <span class="keyword">new</span> String(<span class="string">"World"</span>);
+
+<span class="comment">// String concatenation</span>
+String greeting = str1 + <span class="string">" "</span> + str2;</pre>
+            </div>
+            
+            <p class="mt-3 mb-2"><strong>Common String Methods:</strong></p>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Method</th>
+                    <th class="border p-2 text-left">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>length()</code></td>
+                    <td class="border p-2">Returns string length</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>charAt(int)</code></td>
+                    <td class="border p-2">Returns character at position</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>substring(int, int)</code></td>
+                    <td class="border p-2">Returns substring</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>equals(String)</code></td>
+                    <td class="border p-2">Compares string content</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Introduction to Vectors (ArrayList)</h2>
+          <div class="mb-6">
+            <p class="mb-3">While Vector is part of Java's legacy collections, ArrayList is the modern alternative:</p>
+            
+            <div class="code-block mb-3">
+              <pre><span class="keyword">import</span> java.util.ArrayList;
+
+<span class="comment">// Creating ArrayList</span>
+ArrayList&lt;String&gt; fruits = <span class="keyword">new</span> ArrayList&lt;&gt;();
+
+<span class="comment">// Adding elements</span>
+fruits.add(<span class="string">"Apple"</span>);
+fruits.add(<span class="string">"Banana"</span>);
+
+<span class="comment">// Accessing elements</span>
+String fruit = fruits.get(0);</pre>
+            </div>
+            
+            <div class="highlight-box">
+              <p><strong>ArrayList vs. Array:</strong></p>
+              <ul class="list-disc pl-6 space-y-1">
+                <li>Dynamic size (can grow and shrink)</li>
+                <li>Provides useful methods (add, remove, contains)</li>
+                <li>Stores only objects, not primitives</li>
+                <li>Slightly slower than arrays</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Wrapper Classes</h2>
+          <div class="mb-6">
+            <p class="mb-3">Wrapper classes provide object representations of primitive data types:</p>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Primitive Type</th>
+                    <th class="border p-2 text-left">Wrapper Class</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>byte</code></td>
+                    <td class="border p-2"><code>Byte</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>short</code></td>
+                    <td class="border p-2"><code>Short</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>int</code></td>
+                    <td class="border p-2"><code>Integer</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>long</code></td>
+                    <td class="border p-2"><code>Long</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>float</code></td>
+                    <td class="border p-2"><code>Float</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>double</code></td>
+                    <td class="border p-2"><code>Double</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>char</code></td>
+                    <td class="border p-2"><code>Character</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>boolean</code></td>
+                    <td class="border p-2"><code>Boolean</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="comment">// Autoboxing (primitive to wrapper)</span>
+Integer num = 100;
+
+<span class="comment">// Unboxing (wrapper to primitive)</span>
+int value = num;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Example code -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Array and String Example</h3>
+        <div class="code-block">
+          <pre><span class="keyword">public class</span> ArrayStringExample {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Array of strings</span>
+        String[] names = {<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>};
+        
+        <span class="comment">// Loop through array</span>
+        <span class="keyword">for</span> (String name : names) {
+            <span class="comment">// String manipulation</span>
+            String greeting = <span class="string">"Hello, "</span> + name.toUpperCase() + <span class="string">"!"</span>;
+            System.out.println(greeting);
+        }
+    }
+}</pre>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_06_control_flow.html" class="text-gray-500 hover:text-gray-700">Unit 06 | Decision Making and Looping</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_08_oop.html" class="text-gray-500 hover:text-gray-700">Unit 8 | Object-Oriented Programming</a>
+      </div>
+    </div>
+  </body>
+</html>

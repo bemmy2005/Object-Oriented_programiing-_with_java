@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .component-card {
+        transition: all 0.3s ease;
+      }
+      .component-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            JFrame frame = new JFrame();
+            JButton button = new JButton("Click");
+            frame.add(button);
+            frame.setVisible(true);
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 13: <span class="java-accent">Graphics and GUI Programming</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Introduction to Java GUI</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java provides several libraries for creating graphical user interfaces (GUIs):</p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">AWT</h3>
+                <p class="text-sm">Abstract Window Toolkit</p>
+                <ul class="list-disc pl-4 text-xs mt-2">
+                  <li>Platform-dependent</li>
+                  <li>Heavyweight components</li>
+                  <li>Basic components</li>
+                </ul>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Swing</h3>
+                <p class="text-sm">Built on top of AWT</p>
+                <ul class="list-disc pl-4 text-xs mt-2">
+                  <li>Platform-independent</li>
+                  <li>Lightweight components</li>
+                  <li>More advanced components</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Note:</strong> Modern Java applications often use JavaFX instead of Swing, but Swing is still widely used and important to understand.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Basic Swing Components</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JFrame</h3>
+                <p class="text-xs">Main window container</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JPanel</h3>
+                <p class="text-xs">Container for components</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JLabel</h3>
+                <p class="text-xs">Display text or images</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JButton</h3>
+                <p class="text-xs">Clickable button</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JTextField</h3>
+                <p class="text-xs">Single-line text input</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JTextArea</h3>
+                <p class="text-xs">Multi-line text input</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JCheckBox</h3>
+                <p class="text-xs">Toggle selection</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">JRadioButton</h3>
+                <p class="text-xs">Mutually exclusive options</p>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Event Handling</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre>JButton button = <span class="keyword">new</span> JButton(<span class="string">"Click Me"</span>);
+
+<span class="comment">// Add action listener</span>
+button.addActionListener(<span class="keyword">new</span> ActionListener() {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> actionPerformed(ActionEvent e) {
+        System.out.println(<span class="string">"Button clicked!"</span>);
+    }
+});</pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Layout Managers</h2>
+          <div class="mb-6">
+            <p class="mb-3">Layout managers control the position and size of components:</p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">BorderLayout</h3>
+                <p class="text-xs">Five regions: North, South, East, West, Center</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">FlowLayout</h3>
+                <p class="text-xs">Components in a row, wrapping as needed</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">GridLayout</h3>
+                <p class="text-xs">Equal-sized cells in rows and columns</p>
+              </div>
+              
+              <div class="component-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1">BoxLayout</h3>
+                <p class="text-xs">Components in a single row or column</p>
+              </div>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="comment">// Setting layout</span>
+panel.setLayout(<span class="keyword">new</span> BorderLayout());
+
+<span class="comment">// Adding components with constraints</span>
+panel.add(button, BorderLayout.NORTH);</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Graphics in Java</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java provides classes for drawing graphics:</p>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Class</th>
+                    <th class="border p-2 text-left">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>Graphics</code></td>
+                    <td class="border p-2">Basic drawing operations</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>Graphics2D</code></td>
+                    <td class="border p-2">Advanced drawing with better control</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>Color</code></td>
+                    <td class="border p-2">RGB color representation</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>Font</code></td>
+                    <td class="border p-2">Text font styling</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="annotation">@Override</span>
+<span class="keyword">protected void</span> paintComponent(Graphics g) {
+    <span class="keyword">super</span>.paintComponent(g);
+    
+    <span class="comment">// Cast to Graphics2D for advanced features</span>
+    Graphics2D g2d = (Graphics2D) g;
+    
+    <span class="comment">// Set color and draw a rectangle</span>
+    g2d.setColor(Color.BLUE);
+    g2d.fillRect(50, 50, 100, 80);
+    
+    <span class="comment">// Set font and draw text</span>
+    g2d.setFont(<span class="keyword">new</span> Font(<span class="string">"Arial"</span>, Font.BOLD, 16));
+    g2d.setColor(Color.RED);
+    g2d.drawString(<span class="string">"Hello, Graphics!"</span>, 60, 100);
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Simple GUI Example -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Simple GUI Example</h3>
+        <div class="code-block">
+          <pre><span class="keyword">import</span> javax.swing.*;
+<span class="keyword">import</span> java.awt.*;
+<span class="keyword">import</span> java.awt.event.*;
+
+<span class="keyword">public class</span> SimpleGUI {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Create on Event Dispatch Thread</span>
+        SwingUtilities.invokeLater(() -> {
+            <span class="comment">// Create frame</span>
+            JFrame frame = <span class="keyword">new</span> JFrame(<span class="string">"Simple GUI"</span>);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(300, 200);
+            
+            <span class="comment">// Create components</span>
+            JLabel label = <span class="keyword">new</span> JLabel(<span class="string">"Enter your name:"</span>);
+            JTextField textField = <span class="keyword">new</span> JTextField(20);
+            JButton button = <span class="keyword">new</span> JButton(<span class="string">"Submit"</span>);
+            
+            <span class="comment">// Add action listener</span>
+            button.addActionListener(e -> {
+                String name = textField.getText();
+                JOptionPane.showMessageDialog(frame, 
+                    <span class="string">"Hello, "</span> + name + <span class="string">"!"</span>);
+            });
+            
+            <span class="comment">// Create panel and add components</span>
+            JPanel panel = <span class="keyword">new</span> JPanel();
+            panel.setLayout(<span class="keyword">new</span> FlowLayout());
+            panel.add(label);
+            panel.add(textField);
+            panel.add(button);
+            
+            <span class="comment">// Add panel to frame</span>
+            frame.add(panel);
+            frame.setVisible(<span class="keyword">true</span>);
+        });
+    }
+}</pre>
+        </div>
+      </div>
+      
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_12_applets.html" class="text-gray-500 hover:text-gray-700">Unit 12 | Applet Programming</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_14_io.html" class="text-gray-500 hover:text-gray-700">Unit 14 | File Input/Output</a>
+      </div>
+    </div>
+  </body>
+</html>

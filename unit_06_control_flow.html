@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class Example {
+              public static void main(String[] args) {
+                if (condition) {
+                  // code
+                } else {
+                  // code
+                }
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 6: <span class="java-accent">Decision Making and Looping</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Decision Making Statements</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">if Statement</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">if</span> (condition) {
+    <span class="comment">// code to execute if condition is true</span>
+}</pre>
+            </div>
+            <p class="text-sm">Executes a block of code only if the specified condition evaluates to true.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">if-else Statement</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">if</span> (condition) {
+    <span class="comment">// code to execute if condition is true</span>
+} <span class="keyword">else</span> {
+    <span class="comment">// code to execute if condition is false</span>
+}</pre>
+            </div>
+            <p class="text-sm">Provides an alternative path when the condition is false.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">else-if Ladder</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">if</span> (condition1) {
+    <span class="comment">// code for condition1</span>
+} <span class="keyword">else if</span> (condition2) {
+    <span class="comment">// code for condition2</span>
+} <span class="keyword">else</span> {
+    <span class="comment">// code if all conditions are false</span>
+}</pre>
+            </div>
+            <p class="text-sm">Tests multiple conditions in sequence.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">Nested if-else</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">if</span> (outerCondition) {
+    <span class="keyword">if</span> (innerCondition) {
+        <span class="comment">// code when both conditions are true</span>
+    } <span class="keyword">else</span> {
+        <span class="comment">// code when outer is true, inner is false</span>
+    }
+}</pre>
+            </div>
+            <p class="text-sm">Places if-else statements inside other if-else blocks.</p>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">switch Statement</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">switch</span> (expression) {
+    <span class="keyword">case</span> value1:
+        <span class="comment">// code for value1</span>
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> value2:
+        <span class="comment">// code for value2</span>
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        <span class="comment">// code if no match</span>
+}</pre>
+            </div>
+            <p class="text-sm">Multi-way decision based on a single expression.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">Ternary Operator</h3>
+            <div class="code-block mb-3">
+              <pre>result = (condition) ? valueIfTrue : valueIfFalse;</pre>
+            </div>
+            <p class="text-sm">Shorthand for simple if-else statements.</p>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 mt-8 java-blue">Looping Statements</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">while Loop</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">while</span> (condition) {
+    <span class="comment">// code to repeat while condition is true</span>
+}</pre>
+            </div>
+            <p class="text-sm">Repeats a block of code while a condition is true.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">do-while Loop</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">do</span> {
+    <span class="comment">// code to execute at least once</span>
+} <span class="keyword">while</span> (condition);</pre>
+            </div>
+            <p class="text-sm">Executes the code block at least once before checking the condition.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">for Loop</h3>
+            <div class="code-block mb-3">
+              <pre><span class="keyword">for</span> (initialization; condition; update) {
+    <span class="comment">// code to repeat</span>
+}</pre>
+            </div>
+            <p class="text-sm">Compact loop with initialization, condition, and update in one line.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Loop Control -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Loop Control Statements</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <h4 class="font-semibold">break Statement</h4>
+            <p>Terminates the loop and transfers control to the statement following the loop.</p>
+            <div class="code-block mt-2">
+              <pre><span class="keyword">for</span> (int i = 0; i < 10; i++) {
+    <span class="keyword">if</span> (i == 5) {
+        <span class="keyword">break</span>; <span class="comment">// exit loop when i is 5</span>
+    }
+}</pre>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold">continue Statement</h4>
+            <p>Skips the current iteration and proceeds to the next iteration of the loop.</p>
+            <div class="code-block mt-2">
+              <pre><span class="keyword">for</span> (int i = 0; i < 10; i++) {
+    <span class="keyword">if</span> (i % 2 == 0) {
+        <span class="keyword">continue</span>; <span class="comment">// skip even numbers</span>
+    }
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_05_operators.html" class="text-gray-500 hover:text-gray-700">Unit 05 | Operators and Expressions</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_07_arrays_strings.html" class="text-gray-500 hover:text-gray-700">Unit 7 | Arrays, Strings, and Vectors</a>
+      </div>
+    </div>
+  </body>
+</html>

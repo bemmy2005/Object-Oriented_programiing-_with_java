@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .concept-card {
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      .concept-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class Student {
+              private String name;
+              public Student(String name) {
+                this.name = name;
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 8: <span class="java-accent">Object-Oriented Programming</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">The Object Paradigm</h2>
+          <div class="mb-6">
+            <p class="mb-3">Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects" that contain data and code.</p>
+            <p class="mb-3">Objects are instances of classes, which serve as templates or blueprints.</p>
+            
+            <div class="highlight-box">
+              <p><strong>Real-world analogy:</strong> A blueprint (class) for a house can be used to build many actual houses (objects).</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="concept-card bg-white p-4 rounded-lg shadow-sm">
+              <h3 class="font-semibold text-lg mb-2 java-accent">Encapsulation</h3>
+              <p class="text-sm">Bundling data and methods that operate on that data within a single unit (class).</p>
+            </div>
+            
+            <div class="concept-card bg-white p-4 rounded-lg shadow-sm">
+              <h3 class="font-semibold text-lg mb-2 java-accent">Inheritance</h3>
+              <p class="text-sm">Mechanism where a new class inherits properties and behaviors from an existing class.</p>
+            </div>
+            
+            <div class="concept-card bg-white p-4 rounded-lg shadow-sm">
+              <h3 class="font-semibold text-lg mb-2 java-accent">Polymorphism</h3>
+              <p class="text-sm">Ability of different classes to be treated as instances of the same class through inheritance.</p>
+            </div>
+            
+            <div class="concept-card bg-white p-4 rounded-lg shadow-sm">
+              <h3 class="font-semibold text-lg mb-2 java-accent">Abstraction</h3>
+              <p class="text-sm">Hiding complex implementation details and showing only essential features.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Classes and Objects</h2>
+          <div class="mb-6">
+            <div class="code-block mb-3">
+              <pre><span class="comment">// Class definition</span>
+<span class="keyword">public class</span> Student {
+    <span class="comment">// Instance variables (attributes)</span>
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private</span> <span class="keyword">int</span> id;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> Student(String name, <span class="keyword">int</span> id) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.id = id;
+    }
+    
+    <span class="comment">// Methods</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> study() {
+        System.out.println(name + <span class="string">" is studying."</span>);
+    }
+}</pre>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="comment">// Creating objects</span>
+Student student1 = <span class="keyword">new</span> Student(<span class="string">"Alice"</span>, 1001);
+Student student2 = <span class="keyword">new</span> Student(<span class="string">"Bob"</span>, 1002);
+
+<span class="comment">// Calling methods</span>
+student1.study();</pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Encapsulation</h2>
+          <div class="mb-6">
+            <p class="mb-3">Encapsulation is achieved through access modifiers:</p>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Modifier</th>
+                    <th class="border p-2 text-left">Access Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>private</code></td>
+                    <td class="border p-2">Only within the class</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>default</code> (no modifier)</td>
+                    <td class="border p-2">Within the package</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>protected</code></td>
+                    <td class="border p-2">Within package and subclasses</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>public</code></td>
+                    <td class="border p-2">Everywhere</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="code-block">
+              <pre><span class="keyword">public class</span> BankAccount {
+    <span class="keyword">private</span> <span class="keyword">double</span> balance; <span class="comment">// Encapsulated</span>
+    
+    <span class="keyword">public</span> <span class="keyword">double</span> getBalance() {
+        <span class="keyword">return</span> balance;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> deposit(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > 0) {
+            balance += amount;
+        }
+    }
+}</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Inheritance</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="comment">// Base class (superclass)</span>
+<span class="keyword">public class</span> Person {
+    <span class="keyword">protected</span> String name;
+    <span class="keyword">protected</span> <span class="keyword">int</span> age;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> introduce() {
+        System.out.println(<span class="string">"Hi, I'm "</span> + name);
+    }
+}
+
+<span class="comment">// Derived class (subclass)</span>
+<span class="keyword">public class</span> Student <span class="keyword">extends</span> Person {
+    <span class="keyword">private</span> String major;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> study() {
+        System.out.println(<span class="string">"Studying "</span> + major);
+    }
+}</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Interfaces</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="keyword">public interface</span> Drawable {
+    <span class="keyword">void</span> draw(); <span class="comment">// Abstract method</span>
+}
+
+<span class="keyword">public class</span> Circle <span class="keyword">implements</span> Drawable {
+    <span class="keyword">public</span> <span class="keyword">void</span> draw() {
+        System.out.println(<span class="string">"Drawing a circle"</span>);
+    }
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Polymorphism Example -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Polymorphism Example</h3>
+        <div class="code-block">
+          <pre><span class="keyword">class</span> Animal {
+    <span class="keyword">public</span> <span class="keyword">void</span> makeSound() {
+        System.out.println(<span class="string">"Animal makes a sound"</span>);
+    }
+}
+
+<span class="keyword">class</span> Dog <span class="keyword">extends</span> Animal {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> makeSound() {
+        System.out.println(<span class="string">"Dog barks"</span>);
+    }
+}
+
+<span class="keyword">class</span> Cat <span class="keyword">extends</span> Animal {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> makeSound() {
+        System.out.println(<span class="string">"Cat meows"</span>);
+    }
+}
+
+<span class="comment">// Polymorphic usage</span>
+Animal myDog = <span class="keyword">new</span> Dog();
+Animal myCat = <span class="keyword">new</span> Cat();
+myDog.makeSound();  <span class="comment">// Outputs: Dog barks</span>
+myCat.makeSound();  <span class="comment">// Outputs: Cat meows</span></pre>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_07_arrays_strings.html" class="text-gray-500 hover:text-gray-700">Unit 07 | Arrays, Strings, and Vectors</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_09_packages.html" class="text-gray-500 hover:text-gray-700">Unit 9 | Java Packages</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class HelloWorld {
+              public static void main(String[] args) {
+                System.out.println("Hello, World!");
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 3: <span class="java-accent">Learning the Basics of Java</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java Program Structure</h2>
+          <div class="mb-6">
+            <p class="mb-3">Every Java program consists of at least one class definition:</p>
+            <div class="code-block">
+              <pre><span class="keyword">public class</span> MyProgram {
+    <span class="comment">// Class body</span>
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Main method body</span>
+        System.out.println(<span class="string">"Hello!"</span>);
+    }
+}</pre>
+            </div>
+            
+            <div class="mt-4">
+              <p class="mb-2"><strong>Key Components:</strong></p>
+              <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Class Declaration:</strong> <code>public class MyProgram</code></li>
+                <li><strong>Main Method:</strong> Entry point for execution</li>
+                <li><strong>Statements:</strong> Instructions ending with semicolons</li>
+                <li><strong>Comments:</strong> Non-executable explanatory text</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java Tokens</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Token Type</th>
+                    <th class="border p-2 text-left">Examples</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2">Keywords</td>
+                    <td class="border p-2"><code>public</code>, <code>class</code>, <code>static</code>, <code>void</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Identifiers</td>
+                    <td class="border p-2"><code>MyProgram</code>, <code>main</code>, <code>args</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Literals</td>
+                    <td class="border p-2"><code>"Hello!"</code>, <code>42</code>, <code>true</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Operators</td>
+                    <td class="border p-2"><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>=</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Separators</td>
+                    <td class="border p-2"><code>{}</code>, <code>()</code>, <code>;</code>, <code>,</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java Virtual Machine (JVM)</h2>
+          <div class="mb-6">
+            <p class="mb-3">The JVM is the foundation of Java's platform independence:</p>
+            
+            <div class="flex flex-col items-center mb-4">
+              <div class="w-full bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex flex-col">
+                  <div class="p-2 bg-gray-100 text-center font-semibold">Java Source Code (.java)</div>
+                  <div class="p-2 text-center">↓ Compiler (javac)</div>
+                  <div class="p-2 bg-gray-100 text-center font-semibold">Bytecode (.class)</div>
+                  <div class="p-2 text-center">↓ JVM</div>
+                  <div class="p-2 bg-gray-100 text-center font-semibold">Machine Code</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="highlight-box">
+              <p><strong>Key Point:</strong> Java code is compiled once into bytecode, which can then run on any device with a JVM.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Command Line Arguments</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java programs can receive input through command line arguments:</p>
+            <div class="code-block">
+              <pre><span class="keyword">public static void</span> main(String[] args) {
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i < args.length; i++) {
+        System.out.println(<span class="string">"Argument "</span> + i + <span class="string">": "</span> + args[i]);
+    }
+}</pre>
+            </div>
+            <p class="mt-2">To run with arguments: <code>java MyProgram arg1 arg2 arg3</code></p>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Programming Style</h2>
+          <div class="mb-6">
+            <p class="mb-3">Good programming style improves readability and maintainability:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li><strong>Indentation:</strong> Use consistent indentation (typically 4 spaces)</li>
+              <li><strong>Naming:</strong> Use camelCase for variables/methods, PascalCase for classes</li>
+              <li><strong>Comments:</strong> Add meaningful comments to explain complex logic</li>
+              <li><strong>Whitespace:</strong> Use blank lines to separate logical sections</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Implementation Steps -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Implementing a Java Program</h3>
+        <ol class="list-decimal pl-6 space-y-1">
+          <li>Write source code in a text editor (<code>HelloWorld.java</code>)</li>
+          <li>Compile using <code>javac HelloWorld.java</code> to create <code>HelloWorld.class</code></li>
+          <li>Run using <code>java HelloWorld</code> (note: no .class extension when running)</li>
+        </ol>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_02_intro_java.html" class="text-gray-500 hover:text-gray-700">Unit 02 | Introduction to Java</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_04_variables.html" class="text-gray-500 hover:text-gray-700">Unit 4 | Constants, Variables, Data Types</a>
+      </div>
+    </div>
+  </body>
+</html>

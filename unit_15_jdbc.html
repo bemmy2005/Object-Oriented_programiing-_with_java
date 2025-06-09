@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .db-card {
+        transition: all 0.3s ease;
+      }
+      .db-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            Connection conn = DriverManager.getConnection(url, user, password);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+            while (rs.next()) {
+              System.out.println(rs.getString("username"));
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 15: <span class="java-accent">Working with Relational Databases</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Introduction to JDBC</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java Database Connectivity (JDBC) is an API for connecting Java applications to relational databases.</p>
+            
+            <div class="highlight-box">
+              <p><strong>JDBC Components:</strong></p>
+              <ul class="list-disc pl-6 space-y-1">
+                <li>JDBC API: Provides classes and interfaces for database access</li>
+                <li>JDBC Driver Manager: Manages database drivers</li>
+                <li>JDBC Drivers: Database-specific implementations</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">JDBC Architecture</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <div class="flex flex-col items-center">
+                <div class="border border-gray-300 rounded p-2 text-center w-3/4 mb-2">
+                  <strong>Java Application</strong>
+                </div>
+                <div class="border border-gray-300 rounded p-2 text-center w-3/4 mb-2">
+                  <strong>JDBC API</strong>
+                </div>
+                <div class="border border-gray-300 rounded p-2 text-center w-3/4 mb-2">
+                  <strong>JDBC Driver Manager</strong>
+                </div>
+                <div class="grid grid-cols-3 gap-2 w-full">
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>MySQL Driver</strong>
+                  </div>
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>Oracle Driver</strong>
+                  </div>
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>SQL Server Driver</strong>
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 w-full mt-2">
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>MySQL DB</strong>
+                  </div>
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>Oracle DB</strong>
+                  </div>
+                  <div class="border border-gray-300 rounded p-2 text-center text-sm">
+                    <strong>SQL Server DB</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">JDBC Connection Steps</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-1 gap-4">
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">1. Register the Driver</h3>
+                <div class="code-block text-sm">
+                  <pre>Class.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);</pre>
+                </div>
+                <p class="text-xs mt-1">Note: Modern JDBC drivers auto-register</p>
+              </div>
+              
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">2. Create Connection</h3>
+                <div class="code-block text-sm">
+                  <pre>Connection conn = DriverManager.getConnection(
+    <span class="string">"jdbc:mysql://localhost:3306/mydb"</span>,
+    <span class="string">"username"</span>, <span class="string">"password"</span>);</pre>
+                </div>
+              </div>
+              
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">3. Create Statement</h3>
+                <div class="code-block text-sm">
+                  <pre>Statement stmt = conn.createStatement();</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">JDBC Operations</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-1 gap-4">
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">Execute Query (SELECT)</h3>
+                <div class="code-block text-sm">
+                  <pre>ResultSet rs = stmt.executeQuery(
+    <span class="string">"SELECT * FROM employees"</span>);
+
+<span class="keyword">while</span> (rs.next()) {
+    <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);
+    String name = rs.getString(<span class="string">"name"</span>);
+    System.out.println(id + <span class="string">": "</span> + name);
+}</pre>
+                </div>
+              </div>
+              
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">Execute Update (INSERT, UPDATE, DELETE)</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> rowsAffected = stmt.executeUpdate(
+    <span class="string">"INSERT INTO employees VALUES (1, 'John')"</span>);
+
+System.out.println(rowsAffected + <span class="string">" row(s) inserted"</span>);</pre>
+                </div>
+              </div>
+              
+              <div class="db-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-1 java-accent">Prepared Statements</h3>
+                <div class="code-block text-sm">
+                  <pre>PreparedStatement pstmt = conn.prepareStatement(
+    <span class="string">"INSERT INTO employees VALUES (?, ?)"</span>);
+
+pstmt.setInt(1, 2);
+pstmt.setString(2, <span class="string">"Jane"</span>);
+pstmt.executeUpdate();</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Transactions</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="comment">// Disable auto-commit</span>
+conn.setAutoCommit(<span class="keyword">false</span>);
+
+<span class="keyword">try</span> {
+    <span class="comment">// Execute multiple statements</span>
+    stmt.executeUpdate(<span class="string">"INSERT INTO..."</span>);
+    stmt.executeUpdate(<span class="string">"UPDATE..."</span>);
+    
+    <span class="comment">// Commit if all successful</span>
+    conn.commit();
+} <span class="keyword">catch</span> (SQLException e) {
+    <span class="comment">// Rollback on error</span>
+    conn.rollback();
+} <span class="keyword">finally</span> {
+    <span class="comment">// Restore auto-commit</span>
+    conn.setAutoCommit(<span class="keyword">true</span>);
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Database Metadata -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Database Metadata</h3>
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <p class="mb-2">JDBC provides access to database metadata:</p>
+            <div class="code-block">
+              <pre><span class="comment">// Get database metadata</span>
+DatabaseMetaData dbmd = conn.getMetaData();
+
+<span class="comment">// Get database info</span>
+String dbName = dbmd.getDatabaseProductName();
+String dbVersion = dbmd.getDatabaseProductVersion();
+
+<span class="comment">// List tables</span>
+ResultSet tables = dbmd.getTables(null, null, "%", null);
+<span class="keyword">while</span> (tables.next()) {
+    System.out.println(tables.getString(<span class="string">"TABLE_NAME"</span>));
+}</pre>
+            </div>
+          </div>
+          
+          <div>
+            <p class="mb-2">ResultSet metadata provides information about query results:</p>
+            <div class="code-block">
+              <pre><span class="comment">// Get result set metadata</span>
+ResultSetMetaData rsmd = rs.getMetaData();
+
+<span class="comment">// Get column count</span>
+<span class="keyword">int</span> columnCount = rsmd.getColumnCount();
+
+<span class="comment">// Get column info</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = 1; i <= columnCount; i++) {
+    String name = rsmd.getColumnName(i);
+    String type = rsmd.getColumnTypeName(i);
+    System.out.println(name + <span class="string">": "</span> + type);
+}</pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="highlight-box mt-4">
+          <p><strong>Best Practices:</strong></p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Always close resources (ResultSet, Statement, Connection) in finally blocks or try-with-resources</li>
+            <li>Use prepared statements to prevent SQL injection</li>
+            <li>Use connection pooling for better performance in real applications</li>
+            <li>Handle exceptions properly</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_14_io.html" class="text-gray-500 hover:text-gray-700">Back to Unit 14: Input/Output</a>
+        <!-- Unit 15 | Working with Relational Databases-->
+      </div>
+    </div>
+  </body>
+</html>

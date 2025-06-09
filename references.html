@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .reference-card {
+        transition: all 0.3s ease;
+      }
+      .reference-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .reference-link {
+        color: #5382a1;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            /**
+             * References for Java Programming
+             * Course CIT221: Object-Oriented Programming
+             */
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10"><span class="java-accent">References</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Books</h2>
+          <div class="mb-6">
+            <div class="space-y-4">
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Core Java Volume I - Fundamentals</p>
+                <p class="text-sm">Cay S. Horstmann</p>
+                <p class="text-xs text-gray-600">Comprehensive coverage of Java fundamentals with clear explanations and examples.</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Effective Java</p>
+                <p class="text-sm">Joshua Bloch</p>
+                <p class="text-xs text-gray-600">Best practices for Java programming with practical advice on design patterns and techniques.</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Head First Java</p>
+                <p class="text-sm">Kathy Sierra & Bert Bates</p>
+                <p class="text-xs text-gray-600">Beginner-friendly introduction to Java with visual learning approach.</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Java: The Complete Reference</p>
+                <p class="text-sm">Herbert Schildt</p>
+                <p class="text-xs text-gray-600">Comprehensive reference covering all aspects of Java programming.</p>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Academic Resources</h2>
+          <div class="mb-6">
+            <div class="space-y-4">
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">MIT OpenCourseWare</p>
+                <p class="text-sm">Introduction to Programming in Java</p>
+                <p class="text-xs text-gray-600 reference-link">https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-092-introduction-to-programming-in-java-january-iap-2010/</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Stanford University</p>
+                <p class="text-sm">CS 106A: Programming Methodology</p>
+                <p class="text-xs text-gray-600 reference-link">https://see.stanford.edu/Course/CS106A</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Official Documentation</h2>
+          <div class="mb-6">
+            <div class="space-y-4">
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Oracle Java Documentation</p>
+                <p class="text-sm">Official Java SE documentation and tutorials</p>
+                <p class="text-xs text-gray-600 reference-link">https://docs.oracle.com/en/java/</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Java API Documentation</p>
+                <p class="text-sm">Complete reference for all Java classes and methods</p>
+                <p class="text-xs text-gray-600 reference-link">https://docs.oracle.com/en/java/javase/17/docs/api/</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">The Java Tutorials</p>
+                <p class="text-sm">Practical guides for programming in Java</p>
+                <p class="text-xs text-gray-600 reference-link">https://docs.oracle.com/javase/tutorial/</p>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Online Learning Resources</h2>
+          <div class="mb-6">
+            <div class="space-y-4">
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Codecademy</p>
+                <p class="text-sm">Interactive Java programming courses</p>
+                <p class="text-xs text-gray-600 reference-link">https://www.codecademy.com/learn/learn-java</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">W3Schools Java Tutorial</p>
+                <p class="text-sm">Beginner-friendly Java tutorials with examples</p>
+                <p class="text-xs text-gray-600 reference-link">https://www.w3schools.com/java/</p>
+              </div>
+              
+              <div class="reference-card bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-semibold">Baeldung</p>
+                <p class="text-sm">In-depth Java tutorials and guides</p>
+                <p class="text-xs text-gray-600 reference-link">https://www.baeldung.com/</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional Resources -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Community Resources</h3>
+        <div class="grid grid-cols-3 gap-6">
+          <div>
+            <p class="font-semibold">Stack Overflow</p>
+            <p class="text-sm text-gray-600 reference-link">https://stackoverflow.com/questions/tagged/java</p>
+          </div>
+          <div>
+            <p class="font-semibold">GitHub Java Resources</p>
+            <p class="text-sm text-gray-600 reference-link">https://github.com/topics/java</p>
+          </div>
+          <div>
+            <p class="font-semibold">Reddit r/learnjava</p>
+            <p class="text-sm text-gray-600 reference-link">https://www.reddit.com/r/learnjava/</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        References
+      </div>
+    </div>
+  </body>
+</html>

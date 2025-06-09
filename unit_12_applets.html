@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .applet-card {
+        transition: all 0.3s ease;
+      }
+      .applet-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            import java.applet.Applet;
+            import java.awt.Graphics;
+            
+            public class MyApplet extends Applet {
+              public void paint(Graphics g) {
+                g.drawString("Hello", 50, 50);
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 12: <span class="java-accent">Applet Programming</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Introduction to Applets</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java Applets are small programs that can be embedded in HTML pages and run in a web browser.</p>
+            
+            <div class="highlight-box">
+              <p><strong>Important Note:</strong> Applets are deprecated in modern Java versions (since Java 9) and most browsers no longer support them. This unit is included for historical context and educational purposes.</p>
+            </div>
+            
+            <p class="mt-3">Applets provide:</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Platform independence</li>
+              <li>Security through sandbox model</li>
+              <li>Dynamic web content</li>
+              <li>Network-aware applications</li>
+            </ul>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Applet Architecture</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <div class="text-center mb-2">
+                <div class="inline-block border border-gray-300 rounded px-3 py-1">
+                  <strong>java.lang.Object</strong>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="text-center">
+                  <div class="inline-block border border-gray-300 rounded px-3 py-1 mb-2">
+                    <strong>java.awt.Component</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="text-center">
+                  <div class="inline-block border border-gray-300 rounded px-3 py-1 mb-2">
+                    <strong>java.awt.Container</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="text-center">
+                  <div class="inline-block border border-gray-300 rounded px-3 py-1 mb-2">
+                    <strong>java.awt.Panel</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="text-center">
+                  <div class="inline-block border border-gray-300 rounded px-3 py-1 mb-2">
+                    <strong>java.applet.Applet</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="text-center">
+                  <div class="inline-block border border-gray-300 rounded px-3 py-1 mb-2">
+                    <strong>javax.swing.JApplet</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Applet HTML Tags</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre>&lt;applet 
+  code="MyApplet.class" 
+  width="300" 
+  height="200"&gt;
+  &lt;param name="message" value="Hello"&gt;
+  Your browser does not support applets
+&lt;/applet&gt;</pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Applet Lifecycle</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-1 gap-4">
+              <div class="applet-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">init()</h3>
+                <p class="text-sm">Called when applet is first loaded. Used for one-time initialization.</p>
+              </div>
+              
+              <div class="applet-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">start()</h3>
+                <p class="text-sm">Called after init() and each time applet is revisited in browser.</p>
+              </div>
+              
+              <div class="applet-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">paint(Graphics g)</h3>
+                <p class="text-sm">Called to draw content on applet. Also called when applet needs redrawing.</p>
+              </div>
+              
+              <div class="applet-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">stop()</h3>
+                <p class="text-sm">Called when browser leaves the page containing the applet.</p>
+              </div>
+              
+              <div class="applet-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">destroy()</h3>
+                <p class="text-sm">Called when browser closes the applet. Final cleanup.</p>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Applet Parameters</h2>
+          <div class="mb-6">
+            <p class="mb-3">Parameters can be passed to applets from HTML:</p>
+            
+            <div class="code-block mb-3">
+              <pre><span class="comment">// In HTML</span>
+&lt;param name="message" value="Hello World"&gt;</pre>
+            </div>
+            
+            <div class="code-block">
+              <pre><span class="comment">// In Java</span>
+String message = getParameter("message");</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Applet Security</h2>
+          <div class="mb-6">
+            <p class="mb-3">Applets run in a security sandbox with restrictions:</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Cannot access local files</li>
+              <li>Cannot connect to servers other than the one they came from</li>
+              <li>Cannot start programs on the client</li>
+              <li>Cannot load libraries or define native methods</li>
+            </ul>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Note:</strong> Signed applets can request additional permissions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Simple Applet Example -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Simple Applet Example</h3>
+        <div class="code-block">
+          <pre><span class="keyword">import</span> java.applet.Applet;
+<span class="keyword">import</span> java.awt.Graphics;
+
+<span class="keyword">public class</span> SimpleApplet <span class="keyword">extends</span> Applet {
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> init() {
+        setBackground(java.awt.Color.white);
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> paint(Graphics g) {
+        g.drawString(<span class="string">"Hello, Java Applet World!"</span>, 50, 50);
+        g.drawRect(20, 70, 150, 30);
+        g.drawString(<span class="string">"I am an Applet"</span>, 40, 90);
+    }
+}</pre>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_11_threads.html" class="text-gray-500 hover:text-gray-700">Unit 11 | Multithreaded Programming</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_13_gui.html" class="text-gray-500 hover:text-gray-700">Unit 13 | Graphics and GUI Programming</a>
+      </div>
+    </div>
+  </body>
+</html>

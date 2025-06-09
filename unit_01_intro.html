@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class HelloWorld {
+              public static void main(String[] args) {
+                System.out.println("Hello, World!");
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 1: <span class="java-accent">Introduction</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Internet Origin & Development</h2>
+          <div class="mb-6">
+            <p class="mb-3">The Internet began as ARPANET in the late 1960s, a U.S. Department of Defense project to create a decentralized communication network.</p>
+            <p class="mb-3">Key milestones:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>1969: First ARPANET connection established</li>
+              <li>1983: TCP/IP protocols adopted</li>
+              <li>1989: Tim Berners-Lee proposes the World Wide Web</li>
+              <li>1993: Mosaic web browser released</li>
+              <li>1995: Commercial Internet begins</li>
+            </ul>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Internet Architecture Framework</h2>
+          <div class="mb-6">
+            <p class="mb-3">The Internet operates on a layered architecture:</p>
+            <div class="highlight-box">
+              <ol class="list-decimal pl-6 space-y-1">
+                <li><strong>Application Layer:</strong> HTTP, FTP, SMTP, DNS</li>
+                <li><strong>Transport Layer:</strong> TCP, UDP</li>
+                <li><strong>Internet Layer:</strong> IP, ICMP</li>
+                <li><strong>Link Layer:</strong> Ethernet, Wi-Fi</li>
+              </ol>
+            </div>
+            <p class="mt-3">This layered approach allows for modular development and interoperability.</p>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">World Wide Web</h2>
+          <div class="mb-6">
+            <p class="mb-3">The World Wide Web (WWW) is an information system built on top of the Internet infrastructure.</p>
+            <p class="mb-3">Key components:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li><strong>HTML:</strong> HyperText Markup Language for creating web pages</li>
+              <li><strong>HTTP:</strong> HyperText Transfer Protocol for transmitting web content</li>
+              <li><strong>URLs:</strong> Uniform Resource Locators for addressing web resources</li>
+              <li><strong>Web Browsers:</strong> Software to navigate and display web content</li>
+            </ul>
+          </div>
+          
+          <div class="mt-8">
+            <h3 class="text-xl font-semibold mb-3">Internet vs. World Wide Web</h3>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Internet</th>
+                    <th class="border p-2 text-left">World Wide Web</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2">Global network of networks</td>
+                    <td class="border p-2">Information system on the Internet</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Infrastructure</td>
+                    <td class="border p-2">Service built on infrastructure</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Includes email, FTP, etc.</td>
+                    <td class="border p-2">Primarily web pages and hyperlinks</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Developed in 1960s</td>
+                    <td class="border p-2">Developed in 1989-1991</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Connection to Java -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Connection to Java Programming</h3>
+        <p>
+          Java was designed with the Internet in mind, offering platform independence through its "Write Once, Run Anywhere" 
+          philosophy. This makes it ideal for developing applications that work across the diverse devices and systems 
+          connected to the Internet.
+        </p>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="toc.html" class="text-gray-500 hover:text-gray-700">Back to Table of Contents</a>
+        <!--Table of Contents-->
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_02_intro_java.html" class="text-gray-500 hover:text-gray-700">Next: Unit 2 - Java Basics</a>
+        <!--Unit 1 | Introduction -->
+      </div>
+    </div>
+  </body>
+</html>

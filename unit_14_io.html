@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .io-card {
+        transition: all 0.3s ease;
+      }
+      .io-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            try (FileReader fr = new FileReader("file.txt");
+                 BufferedReader br = new BufferedReader(fr)) {
+              String line;
+              while ((line = br.readLine()) != null) {
+                System.out.println(line);
+              }
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 14: <span class="java-accent">File Input/Output</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Introduction to File I/O</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java provides comprehensive support for reading from and writing to files through various classes in the <code>java.io</code> and <code>java.nio</code> packages.</p>
+            
+            <div class="highlight-box">
+              <p><strong>Key Concepts:</strong></p>
+              <ul class="list-disc pl-6 space-y-1">
+                <li>Streams: Sequence of data</li>
+                <li>Readers/Writers: Character-based I/O</li>
+                <li>Input/Output Streams: Byte-based I/O</li>
+                <li>Buffered operations for efficiency</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">File Handling Classes</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="io-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Character Streams</h3>
+                <ul class="list-disc pl-4 text-sm">
+                  <li>FileReader</li>
+                  <li>FileWriter</li>
+                  <li>BufferedReader</li>
+                  <li>BufferedWriter</li>
+                  <li>PrintWriter</li>
+                </ul>
+              </div>
+              
+              <div class="io-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Byte Streams</h3>
+                <ul class="list-disc pl-4 text-sm">
+                  <li>FileInputStream</li>
+                  <li>FileOutputStream</li>
+                  <li>BufferedInputStream</li>
+                  <li>BufferedOutputStream</li>
+                  <li>DataInputStream/OutputStream</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Reading Text Files</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="comment">// Using BufferedReader</span>
+<span class="keyword">try</span> (BufferedReader reader = <span class="keyword">new</span> BufferedReader(
+        <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>))) {
+    
+    String line;
+    <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) {
+        System.out.println(line);
+    }
+} <span class="keyword">catch</span> (IOException e) {
+    e.printStackTrace();
+}</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Writing Text Files</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="comment">// Using BufferedWriter</span>
+<span class="keyword">try</span> (BufferedWriter writer = <span class="keyword">new</span> BufferedWriter(
+        <span class="keyword">new</span> FileWriter(<span class="string">"output.txt"</span>))) {
+    
+    writer.write(<span class="string">"Hello, File I/O!"</span>);
+    writer.newLine();
+    writer.write(<span class="string">"This is a new line."</span>);
+} <span class="keyword">catch</span> (IOException e) {
+    e.printStackTrace();
+}</pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Modern File I/O (Java 7+)</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java 7 introduced the <code>java.nio.file</code> package with improved file operations:</p>
+            
+            <div class="code-block">
+              <pre><span class="keyword">import</span> java.nio.file.*;
+
+<span class="comment">// Reading all lines</span>
+List&lt;String&gt; lines = Files.readAllLines(
+    Paths.get(<span class="string">"file.txt"</span>));
+
+<span class="comment">// Writing lines</span>
+Files.write(Paths.get(<span class="string">"output.txt"</span>), lines);
+
+<span class="comment">// Copy a file</span>
+Files.copy(source, target, 
+    StandardCopyOption.REPLACE_EXISTING);</pre>
+            </div>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Benefits of NIO:</strong> Better performance, more functionality, and simplified code.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Binary File I/O</h2>
+          <div class="mb-6">
+            <div class="code-block">
+              <pre><span class="comment">// Writing binary data</span>
+<span class="keyword">try</span> (DataOutputStream out = <span class="keyword">new</span> DataOutputStream(
+        <span class="keyword">new</span> FileOutputStream(<span class="string">"data.bin"</span>))) {
+    
+    out.writeInt(123);
+    out.writeDouble(45.67);
+    out.writeUTF(<span class="string">"Hello"</span>);
+}
+
+<span class="comment">// Reading binary data</span>
+<span class="keyword">try</span> (DataInputStream in = <span class="keyword">new</span> DataInputStream(
+        <span class="keyword">new</span> FileInputStream(<span class="string">"data.bin"</span>))) {
+    
+    <span class="keyword">int</span> i = in.readInt();
+    <span class="keyword">double</span> d = in.readDouble();
+    String s = in.readUTF();
+}</pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">File Operations</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Operation</th>
+                    <th class="border p-2 text-left">Method</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2">Check if exists</td>
+                    <td class="border p-2"><code>file.exists()</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Create directory</td>
+                    <td class="border p-2"><code>file.mkdir()</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">List files</td>
+                    <td class="border p-2"><code>file.listFiles()</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Delete file</td>
+                    <td class="border p-2"><code>file.delete()</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Rename file</td>
+                    <td class="border p-2"><code>file.renameTo()</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Object Serialization -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Object Serialization</h3>
+        <p class="mb-4">Serialization allows you to convert Java objects into a byte stream for storage or transmission.</p>
+        
+        <div class="code-block">
+          <pre><span class="comment">// Serializing an object</span>
+<span class="keyword">try</span> (ObjectOutputStream out = <span class="keyword">new</span> ObjectOutputStream(
+        <span class="keyword">new</span> FileOutputStream(<span class="string">"object.ser"</span>))) {
+    
+    out.writeObject(myObject); <span class="comment">// Object must implement Serializable</span>
+}
+
+<span class="comment">// Deserializing an object</span>
+<span class="keyword">try</span> (ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(
+        <span class="keyword">new</span> FileInputStream(<span class="string">"object.ser"</span>))) {
+    
+    MyClass obj = (MyClass) in.readObject();
+}</pre>
+        </div>
+        
+        <div class="highlight-box mt-4">
+          <p><strong>Note:</strong> Classes must implement the <code>Serializable</code> interface. Use <code>transient</code> keyword for fields you don't want to serialize.</p>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_13_gui.html" class="text-gray-500 hover:text-gray-700">Graphics and GUI Programming</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_15_jdbc.html" class="text-gray-500 hover:text-gray-700">Working with Relational Databases</a>
+      </div>
+    </div>
+  </body>
+</html>

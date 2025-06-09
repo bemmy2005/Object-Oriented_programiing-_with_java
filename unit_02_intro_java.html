@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class HelloWorld {
+              public static void main(String[] args) {
+                System.out.println("Hello, World!");
+              }
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 2: <span class="java-accent">Introduction to Java</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java Evolution</h2>
+          <div class="mb-6">
+            <p class="mb-3"><strong>History:</strong> Java was created by James Gosling at Sun Microsystems (now owned by Oracle) and released in 1995.</p>
+            
+            <div class="mt-4 bg-white rounded-lg shadow-sm p-4">
+              <h3 class="text-xl mb-2">Key Java Versions Timeline</h3>
+              <ul class="space-y-2">
+                <li><strong>1995:</strong> Java 1.0 - Initial release</li>
+                <li><strong>1998:</strong> Java 1.2 - "Java 2" with Swing GUI</li>
+                <li><strong>2004:</strong> Java 5 - Generics, annotations</li>
+                <li><strong>2014:</strong> Java 8 - Lambda expressions, Stream API</li>
+                <li><strong>2018:</strong> Java 11 - LTS release</li>
+                <li><strong>2021:</strong> Java 17 - Latest LTS release</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Key Features</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="feature-card bg-white p-4 rounded-lg shadow-sm">
+              <div class="flex items-center mb-2">
+                <i class="fas fa-laptop-code text-xl java-accent mr-2"></i>
+                <h3 class="font-semibold">Platform Independent</h3>
+              </div>
+              <p class="text-sm">Write Once, Run Anywhere (WORA)</p>
+            </div>
+            
+            <div class="feature-card bg-white p-4 rounded-lg shadow-sm">
+              <div class="flex items-center mb-2">
+                <i class="fas fa-shield-alt text-xl java-accent mr-2"></i>
+                <h3 class="font-semibold">Secure</h3>
+              </div>
+              <p class="text-sm">Runs in sandbox environment</p>
+            </div>
+            
+            <div class="feature-card bg-white p-4 rounded-lg shadow-sm">
+              <div class="flex items-center mb-2">
+                <i class="fas fa-project-diagram text-xl java-accent mr-2"></i>
+                <h3 class="font-semibold">Object-Oriented</h3>
+              </div>
+              <p class="text-sm">Everything is an object</p>
+            </div>
+            
+            <div class="feature-card bg-white p-4 rounded-lg shadow-sm">
+              <div class="flex items-center mb-2">
+                <i class="fas fa-memory text-xl java-accent mr-2"></i>
+                <h3 class="font-semibold">Automatic Memory</h3>
+              </div>
+              <p class="text-sm">Garbage collection</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java vs C and C++</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Feature</th>
+                    <th class="border p-2 text-left">Java</th>
+                    <th class="border p-2 text-left">C/C++</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2">Memory Management</td>
+                    <td class="border p-2">Automatic (Garbage Collection)</td>
+                    <td class="border p-2">Manual (malloc/free, new/delete)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Platform</td>
+                    <td class="border p-2">Platform Independent</td>
+                    <td class="border p-2">Platform Dependent</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Pointers</td>
+                    <td class="border p-2">No direct pointer manipulation</td>
+                    <td class="border p-2">Extensive pointer usage</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Multiple Inheritance</td>
+                    <td class="border p-2">Through interfaces only</td>
+                    <td class="border p-2">Supported in C++</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java and the Internet</h2>
+          <div class="mb-6">
+            <p class="mb-3">Java was designed with the Internet in mind:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li><strong>Applets:</strong> Java programs embedded in web pages (now deprecated)</li>
+              <li><strong>Servlets:</strong> Server-side Java components</li>
+              <li><strong>Web Applications:</strong> Enterprise-scale web systems</li>
+              <li><strong>Web Services:</strong> RESTful APIs and SOAP services</li>
+            </ul>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Note:</strong> While Applets were once a major feature, they are now deprecated in favor of modern web technologies.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Java Environment</h2>
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="flex flex-col items-center">
+              <div class="w-full flex justify-between items-center p-2 bg-gray-100 rounded-t-lg">
+                <div class="font-semibold">JDK</div>
+                <div>Java Development Kit</div>
+              </div>
+              <div class="w-full flex justify-between items-center p-2">
+                <div class="font-semibold">JRE</div>
+                <div>Java Runtime Environment</div>
+              </div>
+              <div class="w-full flex justify-between items-center p-2 bg-gray-100">
+                <div class="font-semibold">JVM</div>
+                <div>Java Virtual Machine</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Simple Hello World Example -->
+      <div class="mt-8 z-10">
+        <h3 class="text-xl font-semibold mb-2">A Simple Java Program</h3>
+        <div class="code-block">
+          <pre><span class="comment">// Your first Java program</span>
+<span class="keyword">public class</span> HelloWorld {
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(<span class="string">"Hello, World!"</span>);
+    }
+}</pre>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_01_intro.html" class="text-gray-500 hover:text-gray-700">Unit 01 | Introduction</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_03_basics.html" class="text-gray-500 hover:text-gray-700">Unit 3 | Learning the Basics</a>
+      </div>
+    </div>
+  </body>
+</html>

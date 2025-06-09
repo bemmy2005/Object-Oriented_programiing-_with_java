@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .toc-item {
+        transition: all 0.3s ease;
+      }
+      .toc-item:hover {
+        transform: translateX(10px);
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            public class HelloWorld {
+              public static void main(String[] args) {
+                System.out.println("Hello, World!");
+              }
+            }
+          </text>
+          <!-- Repeat the pattern -->
+          <text x="0" y="80" font-family="monospace" font-size="12" fill="#333">
+            for(int i=0; i<10; i++) {
+              System.out.println(i);
+            }
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-5xl font-bold mb-8 z-10">Table of Contents</h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Table of Contents -->
+      <div class="grid grid-cols-2 gap-x-16 gap-y-4 z-10">
+        <!-- Left column -->
+        <div>
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">1</span>
+            </div>
+            <span class="text-xl"><a href="unit_01_intro.html">Introduction</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">2</span>
+            </div>
+            <span class="text-xl"><a href="unit_02_intro_java.html"> Introduction to Java</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">3</span>
+            </div>
+            <span class="text-xl"><a href="unit_03_basics.html">Learning the Basics</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">4</span>
+            </div>
+            <span class="text-xl"><a href="unit_04_variables.html">Constants, Variables, Data Types</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">5</span>
+            </div>
+            <span class="text-xl"> <a href="unit_05_operators.html">Operators and Expressions</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">6</span>
+            </div>
+            <span class="text-xl"> <a href="unit_06_control_flow.html">Decision Making and Looping</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">7</span>
+            </div>
+            <span class="text-xl"><a href="unit_07_arrays_strings.html">Arrays, Strings, and Vectors</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">8</span>
+            </div>
+            <span class="text-xl"><a href="unit_08_oop.html">Object-Oriented Programming</a></span>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">9</span>
+            </div>
+            <span class="text-xl"><a href="unit_09_packages.html">Java Packages</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">10</span>
+            </div>
+            <span class="text-xl"><a href="unit_10_exceptions.html">Exception Handling</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">11</span>
+            </div>
+            <span class="text-xl"><a href="unit_11_threads.html">Multithreaded Programming</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">12</span>
+            </div>
+            <span class="text-xl"><a href="unit_12_applets.html">Applet Programming</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">13</span>
+            </div>
+            <span class="text-xl"><a href="unit_13_gui.html">Graphics and GUI Programming</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">14</span>
+            </div>
+            <span class="text-xl"><a href="unit_14_io.html">File Input/Output</a></span>
+          </div>
+          
+          <div class="toc-item flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+              <span class="font-bold">15</span>
+            </div>
+            <span class="text-xl"><a href="unit_15_jdbc.html">Working with Relational Databases </a></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Course description -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10 max-w-4xl">
+        <p class="text-lg">
+         
+          This course introduces the core concepts of object-oriented programming using Java.   
+          You will learn everything from basic syntax to advanced application development,  enabling you to write both small applications and larger enterprise systems.
+       
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

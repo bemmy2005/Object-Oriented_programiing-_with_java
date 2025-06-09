@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e4e8ec; /* fallback background */
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow: hidden;
+        position: relative;
+      }
+      .java-accent {
+        color: #f89820; /* Java orange color */
+      }
+      .java-blue {
+        color: #5382a1; /* Java blue color */
+      }
+      .code-pattern {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .code-block {
+        font-family: 'Consolas', 'Monaco', monospace;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-x: auto;
+        border-left: 4px solid #5382a1;
+      }
+      .keyword {
+        color: #0033b3;
+        font-weight: bold;
+      }
+      .string {
+        color: #067d17;
+      }
+      .comment {
+        color: #8c8c8c;
+        font-style: italic;
+      }
+      .highlight-box {
+        border-left: 4px solid #f89820;
+        background-color: rgba(248, 152, 32, 0.1);
+        padding: 10px 15px;
+        margin: 10px 0;
+      }
+      .operator-card {
+        transition: all 0.3s ease;
+      }
+      .operator-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container flex flex-col p-16 relative">
+      <!-- Background code pattern -->
+      <div class="code-pattern">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <text x="0" y="20" font-family="monospace" font-size="12" fill="#333">
+            int a = 5;
+            int b = 3;
+            int sum = a + b;
+            int product = a * b;
+            boolean result = (a > b) && (a != 0);
+          </text>
+        </svg>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-4xl font-bold mb-6 z-10">Unit 5: <span class="java-accent">Operators and Expressions</span></h1>
+      
+      <!-- Horizontal line -->
+      <div class="w-3/4 h-1 bg-gray-300 mb-8 z-10"></div>
+      
+      <!-- Content -->
+      <div class="grid grid-cols-2 gap-8 z-10">
+        <!-- Left column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Arithmetic Operators</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Operator</th>
+                    <th class="border p-2 text-left">Description</th>
+                    <th class="border p-2 text-left">Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>+</code></td>
+                    <td class="border p-2">Addition</td>
+                    <td class="border p-2"><code>a + b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>-</code></td>
+                    <td class="border p-2">Subtraction</td>
+                    <td class="border p-2"><code>a - b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>*</code></td>
+                    <td class="border p-2">Multiplication</td>
+                    <td class="border p-2"><code>a * b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>/</code></td>
+                    <td class="border p-2">Division</td>
+                    <td class="border p-2"><code>a / b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>%</code></td>
+                    <td class="border p-2">Modulus (Remainder)</td>
+                    <td class="border p-2"><code>a % b</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="keyword">int</span> a = 10;
+<span class="keyword">int</span> b = 3;
+
+<span class="keyword">int</span> sum = a + b;        <span class="comment">// 13</span>
+<span class="keyword">int</span> difference = a - b;  <span class="comment">// 7</span>
+<span class="keyword">int</span> product = a * b;     <span class="comment">// 30</span>
+<span class="keyword">int</span> quotient = a / b;    <span class="comment">// 3 (integer division)</span>
+<span class="keyword">int</span> remainder = a % b;   <span class="comment">// 1</span>
+
+<span class="comment">// Division with floating-point result</span>
+<span class="keyword">double</span> result = (<span class="keyword">double</span>)a / b;  <span class="comment">// 3.3333...</span></pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Unary Operators</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Increment/Decrement</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> x = 5;
+x++;  <span class="comment">// Post-increment: x = 6</span>
+++x;  <span class="comment">// Pre-increment: x = 7</span>
+x--;  <span class="comment">// Post-decrement: x = 6</span>
+--x;  <span class="comment">// Pre-decrement: x = 5</span></pre>
+                </div>
+              </div>
+              
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Other Unary</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> a = 10;
+<span class="keyword">int</span> b = -a;  <span class="comment">// b = -10</span>
+<span class="keyword">boolean</span> flag = <span class="keyword">true</span>;
+<span class="keyword">boolean</span> not = !flag;  <span class="comment">// not = false</span></pre>
+                </div>
+              </div>
+            </div>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Pre vs. Post Increment:</strong></p>
+              <div class="code-block text-sm mt-2">
+                <pre><span class="keyword">int</span> a = 5;
+<span class="keyword">int</span> b = a++;  <span class="comment">// b = 5, then a = 6</span>
+
+<span class="keyword">int</span> c = 5;
+<span class="keyword">int</span> d = ++c;  <span class="comment">// c = 6, then d = 6</span></pre>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Assignment Operators</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Simple Assignment</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> x = 10;  <span class="comment">// Assign 10 to x</span></pre>
+                </div>
+              </div>
+              
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Compound Assignment</h3>
+                <div class="code-block text-sm">
+                  <pre>x += 5;   <span class="comment">// Same as: x = x + 5</span>
+x -= 3;   <span class="comment">// Same as: x = x - 3</span>
+x *= 2;   <span class="comment">// Same as: x = x * 2</span>
+x /= 4;   <span class="comment">// Same as: x = x / 4</span>
+x %= 3;   <span class="comment">// Same as: x = x % 3</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Relational Operators</h2>
+          <div class="mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border p-2 text-left">Operator</th>
+                    <th class="border p-2 text-left">Description</th>
+                    <th class="border p-2 text-left">Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2"><code>==</code></td>
+                    <td class="border p-2">Equal to</td>
+                    <td class="border p-2"><code>a == b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>!=</code></td>
+                    <td class="border p-2">Not equal to</td>
+                    <td class="border p-2"><code>a != b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>&gt;</code></td>
+                    <td class="border p-2">Greater than</td>
+                    <td class="border p-2"><code>a > b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>&lt;</code></td>
+                    <td class="border p-2">Less than</td>
+                    <td class="border p-2"><code>a < b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>&gt;=</code></td>
+                    <td class="border p-2">Greater than or equal to</td>
+                    <td class="border p-2"><code>a >= b</code></td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2"><code>&lt;=</code></td>
+                    <td class="border p-2">Less than or equal to</td>
+                    <td class="border p-2"><code>a <= b</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="code-block mt-4">
+              <pre><span class="keyword">int</span> a = 10;
+<span class="keyword">int</span> b = 20;
+
+<span class="keyword">boolean</span> isEqual = (a == b);      <span class="comment">// false</span>
+<span class="keyword">boolean</span> isNotEqual = (a != b);   <span class="comment">// true</span>
+<span class="keyword">boolean</span> isGreater = (a > b);     <span class="comment">// false</span>
+<span class="keyword">boolean</span> isLess = (a < b);        <span class="comment">// true</span>
+<span class="keyword">boolean</span> isGreaterEq = (a >= b);  <span class="comment">// false</span>
+<span class="keyword">boolean</span> isLessEq = (a <= b);     <span class="comment">// true</span></pre>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Logical Operators</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">AND</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">boolean</span> result = (a > 5) && (b < 30);</pre>
+                </div>
+                <p class="text-xs mt-2">True only if both conditions are true</p>
+              </div>
+              
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">OR</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">boolean</span> result = (a > 5) || (b < 30);</pre>
+                </div>
+                <p class="text-xs mt-2">True if either condition is true</p>
+              </div>
+              
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">NOT</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">boolean</span> result = !(a > b);</pre>
+                </div>
+                <p class="text-xs mt-2">Inverts the boolean value</p>
+              </div>
+            </div>
+            
+            <div class="highlight-box mt-4">
+              <p><strong>Short-circuit Evaluation:</strong> In <code>&&</code> and <code>||</code> operations, the second condition is only evaluated if necessary.</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-semibold mb-4 java-blue">Bitwise Operators</h2>
+          <div class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Bitwise AND, OR, XOR</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> a = 5;  <span class="comment">// 0101 in binary</span>
+<span class="keyword">int</span> b = 3;  <span class="comment">// 0011 in binary</span>
+
+<span class="keyword">int</span> c = a & b;  <span class="comment">// 0001 = 1</span>
+<span class="keyword">int</span> d = a | b;  <span class="comment">// 0111 = 7</span>
+<span class="keyword">int</span> e = a ^ b;  <span class="comment">// 0110 = 6</span></pre>
+                </div>
+              </div>
+              
+              <div class="operator-card bg-white p-4 rounded-lg shadow-sm">
+                <h3 class="font-semibold text-lg mb-2 java-accent">Shift Operators</h3>
+                <div class="code-block text-sm">
+                  <pre><span class="keyword">int</span> x = 8;    <span class="comment">// 1000 in binary</span>
+
+<span class="keyword">int</span> y = x << 2;  <span class="comment">// 100000 = 32</span>
+<span class="keyword">int</span> z = x >> 1;  <span class="comment">// 0100 = 4</span>
+<span class="keyword">int</span> w = x >>> 1; <span class="comment">// 0100 = 4</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Operator Precedence -->
+      <div class="mt-8 p-6 bg-white bg-opacity-70 rounded-lg shadow-md z-10">
+        <h3 class="text-xl font-semibold mb-2">Operator Precedence</h3>
+        <p class="mb-4">Operators are evaluated in a specific order. When in doubt, use parentheses to control the order of evaluation.</p>
+        
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <p class="font-semibold mb-2">Higher precedence:</p>
+            <ol class="list-decimal pl-6 space-y-1">
+              <li>Postfix operators (<code>expr++</code>, <code>expr--</code>)</li>
+              <li>Prefix operators (<code>++expr</code>, <code>--expr</code>, <code>+expr</code>, <code>-expr</code>, <code>!</code>, <code>~</code>)</li>
+              <li>Multiplicative (<code>*</code>, <code>/</code>, <code>%</code>)</li>
+              <li>Additive (<code>+</code>, <code>-</code>)</li>
+              <li>Shift (<code><<</code>, <code>>></code>, <code>>>></code>)</li>
+            </ol>
+          </div>
+          <div>
+            <p class="font-semibold mb-2">Lower precedence:</p>
+            <ol class="list-decimal pl-6 space-y-1" start="6">
+              <li>Relational (<code><</code>, <code>></code>, <code><=</code>, <code>>=</code>, <code>instanceof</code>)</li>
+              <li>Equality (<code>==</code>, <code>!=</code>)</li>
+              <li>Bitwise AND (<code>&</code>)</li>
+              <li>Bitwise XOR (<code>^</code>)</li>
+              <li>Bitwise OR (<code>|</code>)</li>
+              <li>Logical AND (<code>&&</code>)</li>
+              <li>Logical OR (<code>||</code>)</li>
+              <li>Assignment (<code>=</code>, <code>+=</code>, etc.)</li>
+            </ol>
+          </div>
+        </div>
+        
+        <div class="code-block mt-4">
+          <pre><span class="keyword">int</span> result = 10 + 5 * 2;  <span class="comment">// 20, not 30 (multiplication has higher precedence)</span>
+<span class="keyword">int</span> result2 = (10 + 5) * 2;  <span class="comment">// 30 (parentheses control the order)</span></pre>
+        </div>
+      </div>
+      
+      <!-- Footer with slide number -->
+      <div class="absolute bottom-4 left-8 text-gray-500">
+        <a href="unit_04_variables.html" class="text-gray-500 hover:text-gray-700">Unit 04 | Constants, Variables, Data Types</a>
+      </div>
+      <div class="absolute bottom-4 right-8 text-gray-500">
+        <a href="unit_06_control_flow.html" class="text-gray-500 hover:text-gray-700">Unit 6 | Decision Making and Looping</a>
+      </div>
+    </div>
+  </body>
+</html>
